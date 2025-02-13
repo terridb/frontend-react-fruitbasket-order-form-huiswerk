@@ -1,86 +1,60 @@
 import './App.css'
 import {useState} from "react";
 import CounterTile from "./components/CounterTile.jsx";
+import {countDown, countReset, countUp} from "./helpers/fruitCounter.js";
 
 function App() {
-    const [strawberries, setStrawberries] = useState(0);
-    const [bananas, setBananas] = useState(0);
-    const [apples, setApples] = useState(0);
-    const [kiwis, setKiwis] = useState(0);
-    console.log([strawberries]);
-    console.log([bananas]);
-    console.log([apples]);
-    console.log([kiwis]);
+    const [state, setState] = useState({
+        strawberries: 0,
+        bananas: 0,
+        apples: 0,
+        kiwis: 0
+    });
 
     return (
         <>
             <h1>Fruitmand bezorgservice</h1>
             <div className="counterTile">
                 <h3>🍓Aardbeien</h3>
-                <button type="button" onClick={() => {
-                    if (strawberries >= 1) {
-                    setStrawberries(strawberries - 1);
-                }}}>
+                <button type="button" onClick={() => {countDown(state, setState,"strawberries")}}>
                     -
                 </button>
-                <p>{strawberries}</p>
-                <button type="button" onClick={() => {
-                    setStrawberries(strawberries + 1)
-                }}>
+                <p>{state.strawberries}</p>
+                <button type="button" onClick={() => {countUp(state, setState,"strawberries")}}>
                     +
                 </button>
             </div>
             <div className="counterTile">
                 <h3>🍌Bananen</h3>
-                <button type="button" onClick={() => {
-                    if (bananas >= 1) {
-                        setBananas(bananas - 1);
-                    }}}>
+                <button type="button" onClick={() => {countDown(state, setState,"bananas")}}>
                     -
                 </button>
-                <p>{bananas}</p>
-                <button type="button" onClick={() => {
-                    setBananas(bananas + 1)
-                }}>
+                <p>{state.bananas}</p>
+                <button type="button" onClick={() => {countUp(state, setState,"bananas")}}>
                     +
                 </button>
             </div>
             <div className="counterTile">
                 <h3>🍏Appels</h3>
-                <button type="button" onClick={() => {
-                    if (apples >= 1) {
-                        setApples(apples - 1);
-                    }}}>
+                <button type="button" onClick={() => {countDown(state, setState,"apples")}}>
                     -
                 </button>
-                <p>{apples}</p>
-                <button type="button" onClick={() => {
-                    setApples(apples + 1)
-                }}>
+                <p>{state.apples}</p>
+                <button type="button" onClick={() => {countUp(state, setState,"apples")}}>
                     +
                 </button>
             </div>
             <div className="counterTile">
                 <h3>🥝Kiwi's</h3>
-                <button type="button" onClick={() => {
-                    if (kiwis >= 1) {
-                        setKiwis(kiwis - 1);
-                    }}}>
+                <button type="button" onClick={() => {countDown(state, setState,"kiwis")}}>
                     -
                 </button>
-                <p>{kiwis}</p>
-                <button type="button" onClick={() => {
-                    setKiwis(kiwis + 1)
-                }}>
+                <p>{state.kiwis}</p>
+                <button type="button" onClick={() => {countUp(state, setState,"kiwis")}}>
                     +
                 </button>
             </div>
-            <button className="resetButton" onClick={() => {
-                setStrawberries(0);
-                setBananas(0);
-                setApples(0);
-                setKiwis(0);
-            }}>
+            <button className="resetButton" onClick={() => {countReset(setState)}}>
                 Reset
             </button>
             {/*<CounterTile*/}
