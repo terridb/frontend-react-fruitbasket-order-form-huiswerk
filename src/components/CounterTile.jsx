@@ -1,22 +1,16 @@
 import './CounterTile.css'
 
-function CounterTile({title, counter}) {
+function CounterTile({counter, title, onCountUp, onCountDown}) {
     return (
         <div className="counterTile">
             <h3>{title}</h3>
-            <button type="button">-</button>
+            <button type="button" onClick={onCountDown}>
+                -
+            </button>
             <p>{counter}</p>
-            {/*<button type="button" onClick={() => {*/}
-            {/*    setCounter*/}
-            {/*}}>+</button>*/}
-
-            {/*<button type="button" onClick={() => {*/}
-            {/*    !light ? setLight(true) : setLight(false);*/}
-            {/*}}>*/}
-            {/*    {!light ? "Turn on" : "Turn off"}*/}
-            {/*</button>*/}
-
-
+            <button type="button" onClick={onCountUp}>
+                +
+            </button>
         </div>
     )
 }
