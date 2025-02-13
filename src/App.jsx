@@ -3,47 +3,59 @@ import {useState} from "react";
 import CounterTile from "./components/CounterTile.jsx";
 import {countDown, countReset, countUp} from "./helpers/fruitCounter.js";
 import Button from "./components/Button.jsx";
+import {useForm} from "react-hook-form";
 
 function App() {
-    const [state, setState] = useState({
+    const [fruitState, setFruitState] = useState({
         strawberries: 0,
         bananas: 0,
         apples: 0,
         kiwis: 0
     });
 
+    const {register, handleSubmit} = useForm({
+        defaultValues: {
+            age: 0,
+            "moment" : "daytime"
+        }
+    });
+
+    function handleFormSubmit(e) {
+        console.log(e, fruitState);
+    }
+
     return (
         <>
             <h1>Fruitmand bezorgservice</h1>
-            <form>
+            <form onSubmit={handleSubmit(handleFormSubmit)}>
                 <fieldset className="formFruitCounter">
                     <CounterTile
                         title="🍓Aardbeien"
-                        counter={state.strawberries}
-                        onCountDown={() => countDown(state, setState, "strawberries")}
-                        onCountUp={() => countUp(state, setState, "strawberries")}
+                        counter={fruitState.strawberries}
+                        onCountDown={() => countDown(fruitState, setFruitState, "strawberries")}
+                        onCountUp={() => countUp(fruitState, setFruitState, "strawberries")}
                     />
                     <CounterTile
                         title="🍌Bananen"
-                        counter={state.bananas}
-                        onCountDown={() => countDown(state, setState, "bananas")}
-                        onCountUp={() => countUp(state, setState, "bananas")}
+                        counter={fruitState.bananas}
+                        onCountDown={() => countDown(fruitState, setFruitState, "bananas")}
+                        onCountUp={() => countUp(fruitState, setFruitState, "bananas")}
                     />
                     <CounterTile
                         title="🍏Appels"
-                        counter={state.apples}
-                        onCountDown={() => countDown(state, setState, "apples")}
-                        onCountUp={() => countUp(state, setState, "apples")}
+                        counter={fruitState.apples}
+                        onCountDown={() => countDown(fruitState, setFruitState, "apples")}
+                        onCountUp={() => countUp(fruitState, setFruitState, "apples")}
                     />
                     <CounterTile
                         title="🥝Kiwi's"
-                        counter={state.kiwis}
-                        onCountDown={() => countDown(state, setState, "kiwis")}
-                        onCountUp={() => countUp(state, setState, "kiwis")}
+                        counter={fruitState.kiwis}
+                        onCountDown={() => countDown(fruitState, setFruitState, "kiwis")}
+                        onCountUp={() => countUp(fruitState, setFruitState, "kiwis")}
                     />
                     <Button
                         title="Reset"
-                        reaction={() => countReset(setState)}
+                        reaction={() => countReset(setFruitState)}
                         buttonType="button"
                     />
                 </fieldset>
@@ -52,7 +64,7 @@ function App() {
                         Voornaam
                         <input
                             type="text"
-                            name="firstname"
+                            {...register("firstname")}
                             id="firstname-field"
                         />
                     </label>
@@ -60,7 +72,7 @@ function App() {
                         Achternaam
                         <input
                             type="text"
-                            name="lastname"
+                            {...register("lastname")}
                             id="lastname-field"
                         />
                     </label>
@@ -68,7 +80,7 @@ function App() {
                         Leeftijd
                         <input
                             type="number"
-                            name="age"
+                            {...register("age")}
                             id="age-field"
                         />
                     </label>
@@ -76,36 +88,36 @@ function App() {
                         Postcode
                         <input
                             type="text"
-                            name="zipcode"
+                            {...register("zipcode")}
                             id="zipcode-field"
                         />
                     </label>
-                    <label htmlFor="delivery-frequency-field">
+                    <label htmlFor="frequency-field">
                         Bezorgfrequentie
                         <select
-                            name="delivery-frequency"
-                            id="delivery-frequency-field">
+                            {...register("frequency")}
+                            id="frequency-field">
                             <option value="every-week">Iedere week</option>
                             <option value="every-two-weeks">Om de week</option>
                             <option value="every-month">Iedere maand</option>
                         </select>
                     </label>
-                    <div className="delivery-moment-field">
-                        <label htmlFor="delivery-moment">
+                    <div className="moment-field">
+                        <label htmlFor="moment">
                             <input
                                 type="radio"
-                                name="delivery-moment"
+                                {...register("moment")}
                                 id="daytime"
-                                value="Day time"
+                                value="daytime"
                             />
                             Overdag
                         </label>
-                        <label htmlFor="delivery-moment">
+                        <label htmlFor="moment">
                             <input
                                 type="radio"
-                                name="delivery-moment"
+                                {...register("moment")}
                                 id="nighttime"
-                                value="Night time"
+                                value="nighttime"
                             />
                             's Avonds
                         </label>
@@ -113,7 +125,7 @@ function App() {
                     <label htmlFor="remarks-field">
                         Opmerking
                         <textarea
-                            name="remarks"
+                            {...register("remarks")}
                             id="remarks-field"
                             rows="6"
                             cols="40"
@@ -122,14 +134,13 @@ function App() {
                     <label htmlFor="conditions-field">
                         <input
                             type="checkbox"
-                            name="conditions"
+                            {...register("conditions")}
                             id="conditions-field"
                         />
                         Ik ga akkoord met de voorwaarden
                     </label>
                     <Button
                         title="Verzend"
-                        reaction={() => countReset(setState)}
                         buttonType="submit"
                     />
                 </fieldset>
