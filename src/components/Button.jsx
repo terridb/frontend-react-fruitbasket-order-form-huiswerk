@@ -1,8 +1,8 @@
 
-function Button({title, reaction}) {
+function Button({title, reaction, buttonType}) {
     return (
         <>
-            <button onClick={reaction}>
+            <button type={buttonType} onClick={reaction}>
                 {title}
             </button>
         </>
