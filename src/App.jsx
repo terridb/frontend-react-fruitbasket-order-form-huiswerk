@@ -58,6 +58,12 @@ function App() {
                         title="Reset"
                         reaction={() => countReset(setFruitState)}
                         buttonType="button"
+                        isDisabled={
+                            fruitState.strawberries === 0 &&
+                            fruitState.bananas === 0 &&
+                            fruitState.apples === 0 &&
+                            fruitState.kiwis === 0
+                        }
                     />
                 </fieldset>
                 <fieldset className="formInput">
