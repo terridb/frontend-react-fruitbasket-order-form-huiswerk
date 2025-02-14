@@ -2,7 +2,6 @@ export function countUp(state, setState, fruit) {
     setState({
         ...state,
         [fruit]: state[fruit] + 1,
-
     })
 }
 

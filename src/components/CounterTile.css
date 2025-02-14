@@ -1,11 +1,32 @@
-.counterTile {
+.counter-tile {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
     padding: 8px;
     margin: 10px;
-    max-width: 200px;
-    border: 2px solid black;
-    border-radius: 10px;
+    width: 300px;
+
+    border-radius: 150px;
+
+}
+
+.counter-button {
+    border: none;
+    background-color: #5d8dad;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    color: white;
+    cursor: pointer;
+}
+
+.active {
+    border: 2px solid #d08dc0;
+    background-color: #fff4fb;
+}
+
+.default {
+    border: 2px solid #5d8dad;
+    background-color: #eff2f6;
 }

@@ -2,8 +2,9 @@ import './App.css'
 import {useState} from "react";
 import CounterTile from "./components/CounterTile.jsx";
 import {countDown, countReset, countUp} from "./helpers/fruitCounter.js";
-import Button from "./components/Button.jsx";
+import MainButton from "./components/MainButton.jsx";
 import {useForm} from "react-hook-form";
+import FormInputField from "./components/FormInputField.jsx";
 
 function App() {
     const [fruitState, setFruitState] = useState({
@@ -16,7 +17,7 @@ function App() {
     const {register, handleSubmit} = useForm({
         defaultValues: {
             age: 0,
-            "moment" : "daytime"
+            "moment": "daytime"
         }
     });
 
@@ -53,95 +54,98 @@ function App() {
                         onCountDown={() => countDown(fruitState, setFruitState, "kiwis")}
                         onCountUp={() => countUp(fruitState, setFruitState, "kiwis")}
                     />
-                    <Button
+                    <MainButton
                         title="Reset"
                         reaction={() => countReset(setFruitState)}
                         buttonType="button"
                     />
                 </fieldset>
                 <fieldset className="formInput">
-                    <label htmlFor="firstname-field">
-                        Voornaam
-                        <input
-                            type="text"
-                            {...register("firstname")}
-                            id="firstname-field"
-                        />
-                    </label>
-                    <label htmlFor="lastname-field">
-                        Achternaam
-                        <input
-                            type="text"
-                            {...register("lastname")}
-                            id="lastname-field"
-                        />
-                    </label>
-                    <label htmlFor="age-field">
-                        Leeftijd
-                        <input
-                            type="number"
-                            {...register("age")}
-                            id="age-field"
-                        />
-                    </label>
-                    <label htmlFor="zipcode-field">
-                        Postcode
-                        <input
-                            type="text"
-                            {...register("zipcode")}
-                            id="zipcode-field"
-                        />
-                    </label>
-                    <label htmlFor="frequency-field">
-                        Bezorgfrequentie
-                        <select
-                            {...register("frequency")}
-                            id="frequency-field">
-                            <option value="every-week">Iedere week</option>
-                            <option value="every-two-weeks">Om de week</option>
-                            <option value="every-month">Iedere maand</option>
-                        </select>
-                    </label>
+                    <FormInputField
+                        isRequired={true}
+                        inputId="firstname-field"
+                        inputLabel="Voornaam"
+                        inputType="text"
+                        inputName="firstname"
+                        register={register}
+                    />
+                    <FormInputField
+                        isRequired={true}
+                        inputId="lastname-field"
+                        inputLabel="Achternaam"
+                        inputType="text"
+                        inputName="lastname"
+                        register={register}
+                    />
+                    <FormInputField
+                        isRequired={true}
+                        inputId="age-field"
+                        inputLabel="Leeftijd"
+                        inputType="number"
+                        inputName="age"
+                        register={register}
+                    />
+                    <FormInputField
+                        isRequired={true}
+                        inputId="zipcode-field"
+                        inputLabel="Postcode"
+                        inputType="text"
+                        inputName="zipcode"
+                        register={register}
+                    />
+                    <FormInputField
+                        inputId="frequency-field"
+                        inputLabel="Bezorgfrequentie"
+                        inputType="select"
+                        inputName="frequency"
+                        register={register}>
+                        <option value="every-week">Iedere week</option>
+                        <option value="every-two-weeks">Om de week</option>
+                        <option value="every-month">Iedere maand</option>
+                    </FormInputField>
                     <div className="moment-field">
-                        <label htmlFor="moment">
-                            <input
-                                type="radio"
-                                {...register("moment")}
-                                id="daytime"
-                                value="daytime"
-                            />
-                            Overdag
-                        </label>
-                        <label htmlFor="moment">
-                            <input
-                                type="radio"
-                                {...register("moment")}
-                                id="nighttime"
-                                value="nighttime"
-                            />
-                            's Avonds
-                        </label>
+                        <FormInputField
+                            inputId="daytime"
+                            inputLabel="Overdag"
+                            inputType="radio"
+                            inputName="moment"
+                            register={register}
+                        />
+                        <FormInputField
+                            inputId="nighttime"
+                            inputLabel="'s Avonds'"
+                            inputType="radio"
+                            inputName="moment"
+                            register={register}
+                        />
                     </div>
-                    <label htmlFor="remarks-field">
-                        Opmerking
-                        <textarea
-                            {...register("remarks")}
-                            id="remarks-field"
-                            rows="6"
-                            cols="40"
-                        />
-                    </label>
-                    <label htmlFor="conditions-field">
-                        <input
-                            type="checkbox"
-                            {...register("conditions")}
-                            id="conditions-field"
-                        />
-                        Ik ga akkoord met de voorwaarden
-                    </label>
-                    <Button
+                    <FormInputField
+                        isRequired={false}
+                        inputId="remarks-field"
+                        inputLabel="Opmerking"
+                        inputName="remarks"
+                        inputType="textarea"
+                        inputRows="6"
+                        inputCols="40"
+                        register={register}
+                    />
+                    <FormInputField
+                        isRequired={true}
+                        inputId="conditions-field"
+                        inputLabel="Ik ga akkoord met de voorwaarden"
+                        inputName="conditions"
+                        register={register}
+                        inputType="checkbox"
+                    />
+                    <MainButton
                         title="Verzend"
                         buttonType="submit"
+                        isDisabled={
+                            fruitState.strawberries === 0 &&
+                            fruitState.bananas === 0 &&
+                            fruitState.apples === 0 &&
+                            fruitState.kiwis === 0
+                        }
                     />
                 </fieldset>
             </form>
