@@ -1,21 +1,21 @@
-export function countUp(state, setState, fruit) {
-    setState({
-        ...state,
-        [fruit]: state[fruit] + 1,
+export function countUp(fruitState, setFruitState, fruitType) {
+    setFruitState({
+        ...fruitState,
+        [fruitType]: fruitState[fruitType] + 1,
     })
 }
 
-export function countDown(state, setState, fruit) {
-    if (state[fruit] >= 1) {
-        setState({
-            ...state,
-            [fruit]: state[fruit] - 1,
+export function countDown(fruitState, setFruitState, fruitType) {
+    if (fruitState[fruitType] >= 1) {
+        setFruitState({
+            ...fruitState,
+            [fruitType]: fruitState[fruitType] - 1,
         })
     }
 }
 
-export function countReset(setState) {
-    setState({
+export function countReset(setFruitState) {
+    setFruitState({
         strawberries: 0,
         bananas: 0,
         apples: 0,

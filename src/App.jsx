@@ -1,7 +1,7 @@
 import './App.css'
 import {useState} from "react";
 import CounterTile from "./components/CounterTile.jsx";
-import {countDown, countReset, countUp} from "./helpers/fruitCounter.js";
+import {countReset} from "./helpers/fruitCounter.js";
 import MainButton from "./components/MainButton.jsx";
 import {useForm} from "react-hook-form";
 import FormInputField from "./components/FormInputField.jsx";
@@ -22,8 +22,16 @@ function App() {
     });
 
     function handleFormSubmit(e) {
-        console.log(e, fruitState);
+        e.fruit = fruitState;
+        console.log(e);
     }
+
+    const isCounterEmpty = (
+        fruitState.strawberries === 0 &&
+        fruitState.bananas === 0 &&
+        fruitState.apples === 0 &&
+        fruitState.kiwis === 0
+    )
 
     return (
         <>
@@ -32,38 +40,33 @@ function App() {
                 <fieldset className="formFruitCounter">
                     <CounterTile
                         title="🍓Aardbeien"
-                        counter={fruitState.strawberries}
-                        onCountDown={() => countDown(fruitState, setFruitState, "strawberries")}
-                        onCountUp={() => countUp(fruitState, setFruitState, "strawberries")}
+                        fruitState={fruitState}
+                        fruitType="strawberries"
+                        setFruitState={setFruitState}
                     />
                     <CounterTile
                         title="🍌Bananen"
-                        counter={fruitState.bananas}
-                        onCountDown={() => countDown(fruitState, setFruitState, "bananas")}
-                        onCountUp={() => countUp(fruitState, setFruitState, "bananas")}
+                        fruitState={fruitState}
+                        fruitType="bananas"
+                        setFruitState={setFruitState}
                     />
                     <CounterTile
                         title="🍏Appels"
-                        counter={fruitState.apples}
-                        onCountDown={() => countDown(fruitState, setFruitState, "apples")}
-                        onCountUp={() => countUp(fruitState, setFruitState, "apples")}
+                        fruitState={fruitState}
+                        fruitType="apples"
+                        setFruitState={setFruitState}
                     />
                     <CounterTile
                         title="🥝Kiwi's"
-                        counter={fruitState.kiwis}
-                        onCountDown={() => countDown(fruitState, setFruitState, "kiwis")}
-                        onCountUp={() => countUp(fruitState, setFruitState, "kiwis")}
+                        fruitState={fruitState}
+                        fruitType="kiwis"
+                        setFruitState={setFruitState}
                     />
                     <MainButton
                         title="Reset"
                         reaction={() => countReset(setFruitState)}
                         buttonType="button"
-                        isDisabled={
-                            fruitState.strawberries === 0 &&
-                            fruitState.bananas === 0 &&
-                            fruitState.apples === 0 &&
-                            fruitState.kiwis === 0
-                        }
+                        isDisabled={isCounterEmpty}
                     />
                 </fieldset>
                 <fieldset className="formInput">
@@ -146,12 +149,7 @@ function App() {
                     <MainButton
                         title="Verzend"
                         buttonType="submit"
-                        isDisabled={
-                            fruitState.strawberries === 0 &&
-                            fruitState.bananas === 0 &&
-                            fruitState.apples === 0 &&
-                            fruitState.kiwis === 0
-                        }
+                        isDisabled={isCounterEmpty}
                     />
                 </fieldset>
             </form>
