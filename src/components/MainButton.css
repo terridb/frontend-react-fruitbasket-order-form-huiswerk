@@ -1,0 +1,14 @@
+.mainButton {
+    border: none;
+    background-color: #5d8dad;
+    color: #fff;
+    padding: 15px 50px;
+    margin-top: 10px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.mainButton:disabled {
+    cursor: not-allowed;
+    background-color: #c2c2c2;
+}

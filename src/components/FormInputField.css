@@ -1,0 +1,25 @@
+input,
+select,
+textarea {
+    border: 1px solid #7eaac9;
+    border-radius: 15px;
+    padding: 4px 4px 4px 10px;
+    outline: none;
+}
+
+select {
+    display: block;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+textarea {
+    display: block;
+    resize: none;
+    margin-top: 10px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    accent-color: #7eaac9;
+}

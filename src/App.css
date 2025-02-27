@@ -1,0 +1,42 @@
+body {
+    background-color: #7eaac9;
+    color: #5d8dad;
+    font-family: Corbel, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: Corbel, Helvetica, sans-serif;
+    color: #5d8dad;
+}
+
+h1 {
+    color: #fff;
+    text-align: center;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    background-color: #fff;
+    border-radius: 50px;
+    padding: 40px;
+    margin-bottom: 20px;
+}
+
+.formFruitCounter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formInput {
+    gap: 10px;
+    align-items: flex-start;
+}
